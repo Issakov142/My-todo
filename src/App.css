@@ -8,7 +8,8 @@
 }
 
 .error {
-  border: red 1px solid;
+  border: red 2px solid;
+  /*outline: none;*/
 }
 
 .error-message {
