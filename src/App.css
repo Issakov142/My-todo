@@ -1,25 +1,6 @@
-.App {
-  padding: 30px;
+
+
+.todolist-title-container {
   display: flex;
-}
-
-.App > div {
-  margin-right: 50px;
-}
-
-.error {
-  border: red 2px solid;
-  /*outline: none;*/
-}
-
-.error-message {
-  color: red;
-}
-
-.active-filter {
-  background-color: lightgreen;
-}
-
-.is-done {
-  opacity: 0.5;
+  align-items: center;
 }
