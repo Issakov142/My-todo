@@ -9,6 +9,11 @@ import Grid from '@mui/material/Grid2';
 import {MenuButton} from './MenuButton';
 
 export type Filter = 'all' | 'completed' | 'active'
+export type TodolistType = {
+    id: string
+    title: string
+    filter: Filter
+}
 type ThemeMode = 'dark' | 'light'
 
 function App() {
@@ -30,6 +35,7 @@ function App() {
     type TodolistsItemsType = { [todolistId: string]: Item[] }
 
 
+
     let [items, setItems] = useState<TodolistsItemsType>({
             [todolistId1]: [{id: v1(), title: 'CSS', isDone: false},
                 {id: v1(), title: 'React', isDone: true},
@@ -44,14 +50,7 @@ function App() {
         }
     )
 
-    const deleteTodo = (todolistId: string) => {
-        debugger
-        let filteredTodolists = todolists.filter((tl) => tl.id !== todolistId)
-        setTodolists(filteredTodolists)
 
-        delete items[todolistId]
-        setItems({...items})
-    }
 
     const deleteTask = (id: string, todolistId: string) => {
         let deletedItems = items[todolistId].filter((i) => i.id !== id)
@@ -74,6 +73,7 @@ function App() {
         }
         setItems({...items})
     }
+
     const changeTaskTitle = (taskId: string, title: string, todolistId: string) => {
         let task = items[todolistId].find((t) => t.id === taskId)
         if (task) {
@@ -82,17 +82,28 @@ function App() {
         setItems({...items})
     }
 
+
+
+    const addTodolist = (todolistTitle: string) => {
+        const newTodolist: TodolistType = {id: v1(), title: todolistTitle, filter: 'all'}
+
+        setItems({...items, [newTodolist.id]: []})
+        setTodolists([newTodolist, ...todolists])
+    }
+
+    const deleteTodo = (todolistId: string) => {
+        debugger
+        let filteredTodolists = todolists.filter((tl) => tl.id !== todolistId)
+        setTodolists(filteredTodolists)
+
+        delete items[todolistId]
+        setItems({...items})
+    }
+
     const filterTasks = (value: Filter, todolistId: string) => {
         let filteredTodo = todolists.find((tl) => tl.id === todolistId)
         if (filteredTodo) filteredTodo.filter = value
         setTodolists([...todolists])
-    }
-
-    const addTodolist = (todolistTitle: string) => {
-        const newTodolist: Todolist = {id: v1(), title: todolistTitle, filter: 'all'}
-
-        setItems({...items, [newTodolist.id]: []})
-        setTodolists([newTodolist, ...todolists])
     }
 
     const changeTodolistTitle = (title: string, todolistId: string) => {
@@ -103,13 +114,9 @@ function App() {
         setTodolists([...todolists])
     }
 
-    type Todolist = {
-        id: string
-        title: string
-        filter: Filter
-    }
 
-    const [todolists, setTodolists] = useState<Array<Todolist>>([
+
+    const [todolists, setTodolists] = useState<Array<TodolistType>>([
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ])
