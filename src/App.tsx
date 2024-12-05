@@ -3,7 +3,18 @@ import './App.css';
 import {Item, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
-import {AppBar, Box, createTheme, CssBaseline, IconButton, Paper, Switch, ThemeProvider, Toolbar} from '@mui/material';
+import {
+    AppBar,
+    Box,
+    Container,
+    createTheme,
+    CssBaseline,
+    IconButton,
+    Paper,
+    Switch,
+    ThemeProvider,
+    Toolbar
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu'
 import Grid from '@mui/material/Grid2';
 import {MenuButton} from './MenuButton';
@@ -15,6 +26,8 @@ export type TodolistType = {
     filter: Filter
 }
 type ThemeMode = 'dark' | 'light'
+export type TodolistsItemsType = { [todolistId: string]: Item[] }
+
 
 function App() {
 
@@ -32,7 +45,6 @@ function App() {
     const todolistId1 = v1()
     const todolistId2 = v1()
 
-    type TodolistsItemsType = { [todolistId: string]: Item[] }
 
 
 
