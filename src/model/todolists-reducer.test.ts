@@ -12,10 +12,10 @@ import {TodolistType} from '../App';
 
 let startState: TodolistType[]
 
-beforeEach(()=>{
+beforeEach(() => {
     startState = [
-        { id: todolistId1, title: 'What to learn', filter: 'all' },
-        { id: todolistId2, title: 'What to buy', filter: 'all' },
+        {id: todolistId1, title: 'What to learn', filter: 'all'},
+        {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]
 })
 
@@ -29,9 +29,9 @@ test('correct todolist should be romoved', () => {
 
 })
 
-test ('correct todolist should be added', () => {
+test('correct todolist should be added', () => {
 
-    const newTitle = "New Todolist"
+    const newTitle = 'New Todolist'
 
     const endState = todolistsReducer(initialState, addTodolistAC(newTitle))
 
@@ -39,25 +39,30 @@ test ('correct todolist should be added', () => {
     expect(endState[2].title).toBe(newTitle)
 })
 
-test ('correct todolist should change its name', () => {
-    const newTitle = "New Todolist"
+test('correct todolist should change its name', () => {
+    const newTitle = 'New Todolist'
 
 
-    const endState = todolistsReducer(initialState, changeTodolistTitleAC({todolistTitle: newTitle, todoId: todolistId2}))
+    const endState = todolistsReducer(initialState, changeTodolistTitleAC({
+        todolistTitle: newTitle,
+        todoId: todolistId2
+    }))
 
     expect(endState[1].title).toBe(newTitle)
-    expect(endState[0].title).toBe("What to learn")
+    expect(endState[0].title).toBe('What to learn')
 })
 
 test('correct filter of todolist should be changed', () => {
 
 
+    const newValue = 'completed' as const
 
-        const newValue = "completed" as const
+    const endState = todolistsReducer(initialState, changeTodolistFilterAC({
+        todoId: todolistId2,
+        filterValue: newValue
+    }))
 
-    const endState = todolistsReducer(initialState, changeTodolistFilterAC({todoId: todolistId2, filterValue: newValue}))
-
-    expect(endState[0].filter).toBe("all")
+    expect(endState[0].filter).toBe('all')
     expect(endState[1].filter).toBe(newValue)
 
 })

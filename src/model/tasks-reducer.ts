@@ -14,14 +14,14 @@ export const tasksReducer = (state: TodolistsItemsType = initialState, action: A
             let deletedItems = state[action.payload.todolistId].filter((i) => i.id !== action.payload.taskId)
             state[action.payload.todolistId] = deletedItems
 
-            return state
+            return {...state}
         }
         case 'ADD_TASK': {
             let newTask: Item = {id: v1(), title: action.payload.title, isDone: false}
             let modifiedTodolist = [newTask, ...state[action.payload.todolistId]]
             state[action.payload.todolistId] = modifiedTodolist
 
-            return state
+            return {...state}
         }
         case 'CHANGE_TASK_STATUS': {
             let task = state[action.payload.todolistId].find((t) => t.id === action.payload.taskId)
@@ -29,7 +29,7 @@ export const tasksReducer = (state: TodolistsItemsType = initialState, action: A
                 task.isDone = action.payload.isDone
             }
 
-            return state
+            return {...state}
         }
         case 'CHANGE_TASK_TITLE': {
             const {taskId, todolistId, title} = action.payload
@@ -38,7 +38,7 @@ export const tasksReducer = (state: TodolistsItemsType = initialState, action: A
                 task.title = title
             }
 
-            return state
+            return {...state}
         }
         case 'REMOVE-TODOLIST': {
             delete state[action.payload.id]
