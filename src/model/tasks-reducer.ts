@@ -51,7 +51,7 @@ export const tasksReducer = (state: TodolistsItemsType = initialState, action: A
         }
 
         default:
-            throw new Error('I don\'t understand this action\'s type')
+            return state
     }
 
 }

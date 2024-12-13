@@ -4,13 +4,15 @@ import {
     changeTodolistTitleAC,
     initialState,
     removeTodolistAC,
-    todolistId1,
-    todolistId2,
     todolistsReducer
 } from './todolists-reducer';
 import {TodolistType} from '../App';
+import {v1} from 'uuid';
 
+const todolistId1 = v1()
+const todolistId2 = v1()
 let startState: TodolistType[]
+
 
 beforeEach(() => {
     startState = [
