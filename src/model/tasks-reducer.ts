@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {Filter, TodolistsItemsType, TodolistType} from '../App';
+import {Filter, TodolistsItemsType, TodolistType} from '../app/App';
 import {Item} from '../Todolist';
 import {AddTodolistActionType, RemoveTodolistActionType} from './todolists-reducer';
 
