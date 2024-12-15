@@ -13,8 +13,6 @@ import {
     removeTodolistAC
 } from '../model/todolists-reducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../model/tasks-reducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from './store';
 import {useAppDispatch, useAppSelector} from './hooks';
 import {selectTasks} from '../model/tasks-selectors';
 import {selectTodolists} from '../model/todolists-selectors';
@@ -71,7 +69,7 @@ function App() {
 
     const addTodolist = (todolistTitle: string) => {
 
-        let addTodolistAction = addTodolistAC(todolistTitle)
+        const addTodolistAction = addTodolistAC(todolistTitle)
 
         dispatch(addTodolistAction)
 
