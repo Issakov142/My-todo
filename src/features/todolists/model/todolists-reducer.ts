@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {Filter, TodolistType} from '../app/App';
+import {Filter, TodolistType} from '../../../app/App';
 
 
 export const initialState: TodolistType[] = []

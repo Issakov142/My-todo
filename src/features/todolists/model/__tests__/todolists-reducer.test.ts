@@ -5,8 +5,8 @@ import {
     initialState,
     removeTodolistAC,
     todolistsReducer
-} from './todolists-reducer';
-import {TodolistType} from '../app/App';
+} from '../todolists-reducer';
+import {TodolistType} from '../../../../app/App';
 import {v1} from 'uuid';
 
 const todolistId1 = v1()
