@@ -1,13 +1,13 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import {ChangeEvent} from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import ListItem from '@mui/material/ListItem';
+import {ChangeEvent} from 'react';
 // import {EditableSpan} from "../../../../../../../common/components/EditableSpan/EditableSpan";
 import {useAppDispatch} from 'common/hooks/useAppDispatch';
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TaskType} from "../../../../../model/tasks-reducer";
-import {TodolistType} from "../../../../../model/todolists-reducer";
-import {getListItemSx} from "./Task.styles";
+import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TaskType} from '../../../../../model/tasks-reducer';
+import {TodolistType} from '../../../../../model/todolists-reducer';
+import {getListItemSx} from './Task.styles';
 import {EditableSpan} from 'common/components';
 // import {EditableSpan} from '../../../../../../../common/components/EditableSpan';
 

@@ -1,6 +1,7 @@
 import type {Response} from 'common/types'
 import {Todolist} from './todolistsApi.types';
-import {instance} from 'common/instance/instance';
+import {instance} from 'common/instance';
+
 
 
 export const todolistsApi = {

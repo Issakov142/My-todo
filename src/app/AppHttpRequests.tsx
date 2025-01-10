@@ -1,14 +1,15 @@
 import Checkbox from '@mui/material/Checkbox'
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import {AddItemForm} from '../common/components/AddItemForm/AddItemForm'
-import {EditableSpan} from '../common/components/EditableSpan/EditableSpan'
+import {AddItemForm} from 'common/components'
+import {EditableSpan} from 'common/components'
 
 import axios from 'axios';
-import {Response} from '../common/types/types';
+import {Response} from 'common/types';
 import {Todolist} from '../features/todolists/api/todolistsApi.types';
 import {GetTasksResponse, Task} from '../features/todolists/api/tasksApi.types';
 import {todolistsApi} from '../features/todolists/api/todolistsApi';
 import {TaskStatus} from '../features/todolists/lib/enums/enums';
+import {tasksApi} from '../features/todolists/api/tasksApi';
 
 const apiKey = '3c5ddfbd-4db1-4a30-81df-35b5befd70c5'
 const token = 'a45d82a8-cb88-40d6-b941-348ca42162b1'
@@ -27,7 +28,7 @@ export const AppHttpRequests = () => {
         todolistsApi.getTodolists().then((res) => {
             setTodolists(res.data)
             res.data.forEach(({id}) => {
-                axios.get<GetTasksResponse>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}/tasks`, configs).then((res) => {
+                tasksApi.getTasks(id).then((res) => {
                     console.log(res.data)
 
                     setTasks(state => ({...state, [id]: res.data.items}))
@@ -56,9 +57,7 @@ export const AppHttpRequests = () => {
     }
 
     const createTaskHandler = (title: string, todolistId: string) => {
-        axios.post<Response<{
-            item: Task
-        }>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks`, {title}, configs).then((res) => {
+        tasksApi.createTask({title, todolistId}).then((res) => {
             const newTask = res.data.data.item
             const todoId = res.data.data.item.todoListId
             setTasks({...tasks, [todolistId]: [newTask, ...(tasks[todolistId] || [])]})
@@ -67,7 +66,7 @@ export const AppHttpRequests = () => {
     }
 
     const removeTaskHandler = (taskId: string, todolistId: string) => {
-        axios.delete<Response>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks/${taskId}`, configs).then(() => {
+        tasksApi.deleteTask({taskId, todolistId}).then(() => {
             setTasks({...tasks, [todolistId]: [...tasks[todolistId].filter((t) => t.id !== taskId)]})
         })
     }
@@ -83,7 +82,7 @@ export const AppHttpRequests = () => {
             status: e.currentTarget.checked ? TaskStatus.Completed : TaskStatus.New,
         }
 
-        axios.put<Response<{item: Task}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${task.todoListId}/tasks/${task.id}`, model, configs).then((res) => {
+        tasksApi.changeTaskStatus({task, model}).then((res) => {
             console.log(res.data)
             setTasks({...tasks, [task.todoListId]: tasks[task.todoListId].map((t)=>t.id === task.id ? {...t, status: model.status} : t)})
         })
@@ -100,7 +99,7 @@ export const AppHttpRequests = () => {
             status: task.status,
         }
 
-        axios.put<Response<{item: Task}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${task.todoListId}/tasks/${task.id}`, model, configs).then((res) => {
+        tasksApi.changeTaskTitle({task, model}).then((res) => {
             console.log(res.data.data.item.title)
             setTasks({...tasks, [task.todoListId]: tasks[task.todoListId].map((t)=>t.id === task.id ? {...t, title: res.data.data.item.title} : t)})
         })
