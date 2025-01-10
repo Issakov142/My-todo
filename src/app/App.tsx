@@ -19,6 +19,7 @@ export type TodolistsItemsType = { [todolistId: string]: Item[] }
 
 
 function App() {
+    console.log("app is called")
 
     const themeMode = useAppSelector(selectTheme)
 

@@ -12,7 +12,10 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     const onNewTaskTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
         setNewItemTitle(e.currentTarget.value)
-        setError(null)
+        if (error !== null){
+            setError(null)
+        }
+
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {

@@ -17,6 +17,7 @@ type Props = {
     todolist: TodolistType
 }
 
+
 export function Todolist({todolist}: Props) {
     // const { id: todolistId} = todolist
 

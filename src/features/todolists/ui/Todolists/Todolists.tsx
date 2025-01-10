@@ -6,6 +6,8 @@ import {useAppSelector} from '../../../../app/hooks';
 import {selectTodolists} from '../../model/todolists-selectors';
 
 export const Todolists = () => {
+    console.log('Todos rendering')
+
     const todolists = useAppSelector(selectTodolists)
 
     return (
